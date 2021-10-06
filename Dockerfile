@@ -1,9 +1,11 @@
-# rusdevops/bootstrap-cpp image
-FROM ubuntu:20.04
-LABEL maintainer="rusdevops@gmail.com"
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt -y update && \
-    apt -y install software-properties-common doxygen rpm g++-7 curl llvm g++ lcov gcovr cmake python3-pip clang git && \
-    add-apt-repository -y ppa:ubuntu-toolchain-r/test && \
-    pip3 install cpplint gitpython requests && \
-    apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# syntax=docker/dockerfile:1.2
+
+FROM ubuntu:focal
+LABEL description="Universal Docker image to launch testing frameworks embedded within laboratory works at BMSTU"
+LABEL version="0.1"
+ENV TZ=Europe/Moscow
+RUN apt update &&
+    apt install build-essential clang gcc cmake build-essential python3 python3-pip gcovr lcov libboost-all-dev doxygen -y && \
+    pip3 install cpplint && \
+    apt clean && rm -rf /var/lib/apt/lists/*
+	
